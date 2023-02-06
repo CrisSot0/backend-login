@@ -59,6 +59,29 @@ router.post('/register', async (req, res) => {
     }
 })
 
+router.post('/eraseusers', async (req, res) => {
+    const id = req.body.id
+    try{
+        const erasedUser = await User.findByIdAndDelete({_id: id})
+        if(erasedUser){
+            res.json({
+                message: "Usuario Borrado",
+                data: erasedUser
+            })
+        } else {
+            res.json({
+                message: "El usuario no existe en la base de datos",
+                data: null
+            })
+        }
+    } catch(error){
+        res.json({
+            message: "Error al borrar",
+            error
+        })
+    }
+})
+
 router.post('/login', async (req, res) => {
     const { error } = schemaLogin.validate(req.body)
 
@@ -109,6 +132,32 @@ router.get('/getallusers', async (req, res) => {
             error
         })
     }
+})
+
+router.get('/getuser', async (req, res) => {
+    try{
+        const user = await User.find
+    }
+})
+
+router.put('/update', async (req, res) => {
+    const { error } = schemaLogin.validate(req.body)
+
+    if (error) {
+        //console.log(error)
+        return res.status(400).json({
+            error: error.details[0].message
+        })
+    }
+
+    if (isEmailExist) {
+        return res.status(400).json({
+            error: 'El correo ya existe'
+        })
+    } else {
+        emailnew = email
+    }
+
 })
 
 module.exports = router
