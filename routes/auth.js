@@ -134,30 +134,5 @@ router.get('/getallusers', async (req, res) => {
     }
 })
 
-router.get('/getuser', async (req, res) => {
-    try{
-        const user = await User.find
-    }
-})
-
-router.put('/update', async (req, res) => {
-    const { error } = schemaLogin.validate(req.body)
-
-    if (error) {
-        //console.log(error)
-        return res.status(400).json({
-            error: error.details[0].message
-        })
-    }
-
-    if (isEmailExist) {
-        return res.status(400).json({
-            error: 'El correo ya existe'
-        })
-    } else {
-        emailnew = email
-    }
-
-})
 
 module.exports = router
