@@ -134,7 +134,7 @@ router.get('/getallusers', async (req, res) => {
     }
 })
 
-router.post('updateuser', async (req, res) => {
+router.post('/updateuser', async (req, res) => {
 const salt = await bcrypt.genSalt(10)
 const password = await bcrypt.hash(req.body.password, salt)
 
@@ -149,6 +149,7 @@ const password = await bcrypt.hash(req.body.password, salt)
         data,
         {new: true}
     )
+    console.log(actualizado)
     if(actualizado){
         res.json({
             message: "Usuario Actualizado",
